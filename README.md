@@ -2,9 +2,9 @@
 
 SFDX now provides a way to [develop against against any org using SFDX](https://github.com/forcedotcom/salesforcedx-vscode/wiki/Develop-Against-Any-Org-in-Visual-Studio-Code).
 
-However, if you make file changes you still need to manually deploy each file. This package will make it less tedious by auto-deploying your 
+However, if you make file changes you still need to manually deploy each file. This package will make it less tedious by auto-deploying for you.
 
- This package will allow you deploy upon save using the `sfdx force:source:deploy --sourcepath <filename>` command.
+ This package will watch your files for changes and fire the `sfdx force:source:deploy --sourcepath <filename>` command.
 
 ## Pre-requisites
 
