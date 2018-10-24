@@ -44,7 +44,7 @@
     },
     "repository": {
         "type": "git",
-        "url": "https://github.com/omniphx/sfdx-autodeployer-watcher"
+        "url": "https://github.com/omniphx/sfdx-autodeploy-watcher"
     },
     "dependencies": {
         "shelljs": "^0.8.2"
