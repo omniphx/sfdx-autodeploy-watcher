@@ -1,65 +1,24 @@
-# sfdx-file-watcher-for-sandboxes README
+# SFDX Auto Deploy File Watcher
 
-This is the README for your extension "sfdx-file-watcher-for-sandboxes". After writing up a brief description, we recommend including the following sections.
+SFDX now provides a way to [develop against against any org using SFDX](https://github.com/forcedotcom/salesforcedx-vscode/wiki/Develop-Against-Any-Org-in-Visual-Studio-Code).
 
-## Features
+However, if you make file changes you still need to manually deploy each file. This package will make it less tedious by auto-deploying your 
 
-Describe specific features of your extension including screenshots of your extension in action. Image paths are relative to this README file.
+ This package will allow you deploy upon save using the `sfdx force:source:deploy --sourcepath <filename>` command.
 
-For example if there is an image subfolder under your extension project workspace:
+## Pre-requisites
 
-\!\[feature X\]\(images/feature-x.png\)
+* Must have [SFDX installed](https://developer.salesforce.com/tools/sfdxcli)
+* Must have a default username configued (`.sfdx/sfdx-config.json`) or set one up with `$ sfdx force:config:set defaultusername=me@my.org`
+* Must be in a sfdx project directory
 
-> Tip: Many popular extensions utilize animations. This is an excellent way to show off your extension! We recommend short, focused animations that are easy to follow.
+## Todo
 
-## Requirements
-
-If you have any requirements or dependencies, add a section describing those and how to install and configure them.
-
-## Extension Settings
-
-Include if your extension adds any VS Code settings through the `contributes.configuration` extension point.
-
-For example:
-
-This extension contributes the following settings:
-
-* `myExtension.enable`: enable/disable this extension
-* `myExtension.thing`: set to `blah` to do something
-
-## Known Issues
-
-Calling out known issues can help limit users opening duplicate issues against your extension.
+* In progress popup
+* Toggle configuration settings
 
 ## Release Notes
 
-Users appreciate release notes as you update your extension.
+### 0.0.1
 
-### 1.0.0
-
-Initial release of ...
-
-### 1.0.1
-
-Fixed issue #.
-
-### 1.1.0
-
-Added features X, Y, and Z.
-
------------------------------------------------------------------------------------------------------------
-
-## Working with Markdown
-
-**Note:** You can author your README using Visual Studio Code.  Here are some useful editor keyboard shortcuts:
-
-* Split the editor (`Cmd+\` on macOS or `Ctrl+\` on Windows and Linux)
-* Toggle preview (`Shift+CMD+V` on macOS or `Shift+Ctrl+V` on Windows and Linux)
-* Press `Ctrl+Space` (Windows, Linux) or `Cmd+Space` (macOS) to see a list of Markdown snippets
-
-### For more information
-
-* [Visual Studio Code's Markdown Support](http://code.visualstudio.com/docs/languages/markdown)
-* [Markdown Syntax Reference](https://help.github.com/articles/markdown-basics/)
-
-**Enjoy!**
+Initial release. Watcher and deployer published.

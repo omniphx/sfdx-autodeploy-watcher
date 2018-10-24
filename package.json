@@ -1,9 +1,9 @@
 {
-    "name": "sfdx-file-watcher-for-sandboxes",
-    "displayName": "SFDX File Watcher for Sandboxes",
-    "description": "Watches files to deploy to sandboxes",
+    "name": "sfdx-auto-deploy-file-watcher",
+    "displayName": "SFDX Auto Deploy File Watcher",
+    "description": "Watches files to deploy",
     "version": "0.0.1",
-    "publisher": "marty",
+    "publisher": "omniphx",
     "engines": {
         "vscode": "^1.28.0"
     },
@@ -11,15 +11,22 @@
         "Other"
     ],
     "activationEvents": [
-        "onLanguage:apex",
-        "onLanguage:html",
-        "onLanguage:visualforce",
-        "onLanguage:javascript",
-        "onLanguage:css",
-        "onLanguage:xml"
+        "workspaceContains:sfdx-project.json"
     ],
     "main": "./out/extension",
-    "contributes": {},
+    "contributes": {
+        "configuration": {
+            "type": "object",
+            "title": "SFDX Auto Deploy File Watcher",
+            "properties": {
+                "sfdx-auto-deploy-file-watcher.enable": {
+                    "type": "boolean",
+                    "default": "true",
+                    "description": "Enables SFDX Auto Deploy"
+                }
+            }
+        }
+    },
     "scripts": {
         "vscode:prepublish": "npm run compile",
         "compile": "tsc -p ./",
@@ -35,5 +42,9 @@
         "tslint": "^5.8.0",
         "typescript": "^2.6.1",
         "vscode": "^1.1.21"
+    },
+    "repository": {
+        "type" : "git",
+        "url" : "https://github.com/omniphx/sfdx-autodeploy-watcher"
     }
 }

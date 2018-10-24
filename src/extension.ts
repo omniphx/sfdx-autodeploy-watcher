@@ -1,34 +1,38 @@
-// The module 'vscode' contains the VS Code extensibility API
-// Import the necessary extensibility types to use in your code below
-import {ExtensionContext, workspace, window} from 'vscode';
-import * as shell from 'shelljs';
+import {ExtensionContext, workspace, window, Uri} from 'vscode';
+import {cd, exec} from 'shelljs';
 
-// This method is called when your extension is activated. Activation is
-// controlled by the activation events defined in package.json.
 export function activate(context: ExtensionContext) {
+    watcher();
+}
+
+function watcher() {
+    let config = workspace.getConfiguration('sfdx-auto-deploy-file-watcher');
+    if(!config.enable) {return;}
+
     let watcher = workspace.createFileSystemWatcher('**/*.{cls,js,trigger,page,component,cmp,auradoc,css,design,svg,*meta.xml}', true, false, true);
-    let outputChannel = window.createOutputChannel('SFDX Autowatcher');
+    watcher.onDidChange(deployer);
+}
 
-    watcher.onDidChange(event => {
-        console.log('fire');
-        outputChannel.show();
-        outputChannel.clear();
+function deployer(event: Uri) {
+    let outputChannel = window.createOutputChannel('SFDX Auto Deploy File Watcher');
 
-        if(!workspace.workspaceFolders) {
-            outputChannel.appendLine('Need a workspace directory to Autosave');
-            return;
-        }
+    outputChannel.show();
+    outputChannel.clear();
 
-        let workspacePath = workspace.workspaceFolders[0].uri.path;
-        shell.cd(workspacePath);
-    
-        let path = event.path;
-        let command = `sfdx force:source:deploy --sourcepath ${path}`;
-        outputChannel.appendLine(command);
+    if(!workspace.workspaceFolders) {
+        outputChannel.appendLine('Need a workspace directory to Autosave');
+        return;
+    }
 
-        shell.exec(command, {}, (code, stdout, stderr) => {
-            outputChannel.appendLine(stdout);
-            outputChannel.appendLine(stderr);
-        });
+    let workspacePath = workspace.workspaceFolders[0].uri.path;
+    cd(workspacePath);
+
+    let path = event.path;
+    let command = `sfdx force:source:deploy --sourcepath ${path}`;
+    outputChannel.appendLine(command);
+
+    exec(command, {}, (code, stdout, stderr) => {
+        outputChannel.appendLine(stdout);
+        outputChannel.appendLine(stderr);
     });
 }
