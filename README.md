@@ -1,4 +1,4 @@
-# SFDX Auto Deploy File Watcher
+# SFDX Auto Deployer
 
 SFDX now provides a way to [develop against against any org using SFDX](https://github.com/forcedotcom/salesforcedx-vscode/wiki/Develop-Against-Any-Org-in-Visual-Studio-Code).
 

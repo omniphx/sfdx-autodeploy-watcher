@@ -1,6 +1,6 @@
 {
-    "name": "sfdx-auto-deploy-file-watcher",
-    "displayName": "SFDX Auto Deploy File Watcher",
+    "name": "sfdx-auto-deployer",
+    "displayName": "SFDX Auto Deployer",
     "description": "Watches files to deploy",
     "version": "0.0.1",
     "publisher": "omniphx",
@@ -17,12 +17,12 @@
     "contributes": {
         "configuration": {
             "type": "object",
-            "title": "SFDX Auto Deploy File Watcher",
+            "title": "SFDX Auto Deployer",
             "properties": {
-                "sfdx-auto-deploy-file-watcher.enable": {
+                "sfdx-auto-deployer.enable": {
                     "type": "boolean",
                     "default": "true",
-                    "description": "Enables SFDX Auto Deploy"
+                    "description": "Enables SFDX Auto Deployer"
                 }
             }
         }
@@ -38,13 +38,16 @@
         "@types/mocha": "^2.2.42",
         "@types/node": "^8.10.25",
         "@types/shelljs": "^0.8.0",
-        "shelljs": "^0.8.2",
         "tslint": "^5.8.0",
         "typescript": "^2.6.1",
         "vscode": "^1.1.21"
     },
     "repository": {
-        "type" : "git",
-        "url" : "https://github.com/omniphx/sfdx-autodeploy-watcher"
-    }
+        "type": "git",
+        "url": "https://github.com/omniphx/sfdx-autodeployer-watcher"
+    },
+    "dependencies": {
+        "shelljs": "^0.8.2"
+    },
+    "icon": "images/icon.png"
 }

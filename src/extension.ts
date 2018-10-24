@@ -6,7 +6,7 @@ export function activate(context: ExtensionContext) {
 }
 
 function watcher() {
-    let config = workspace.getConfiguration('sfdx-auto-deploy-file-watcher');
+    let config = workspace.getConfiguration('sfdx-auto-deployer');
     if(!config.enable) {return;}
 
     let watcher = workspace.createFileSystemWatcher('**/*.{cls,js,trigger,page,component,cmp,auradoc,css,design,svg,*meta.xml}', true, false, true);
@@ -14,15 +14,17 @@ function watcher() {
 }
 
 function deployer(event: Uri) {
-    let outputChannel = window.createOutputChannel('SFDX Auto Deploy File Watcher');
+    let outputChannel = window.createOutputChannel('SFDX Auto Deployer');
 
     outputChannel.show();
     outputChannel.clear();
-
+    
     if(!workspace.workspaceFolders) {
         outputChannel.appendLine('Need a workspace directory to Autosave');
         return;
     }
+
+    outputChannel.appendLine('Deploying...');
 
     let workspacePath = workspace.workspaceFolders[0].uri.path;
     cd(workspacePath);
