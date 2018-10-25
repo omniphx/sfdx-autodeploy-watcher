@@ -2,7 +2,7 @@
     "name": "sfdx-auto-deployer",
     "displayName": "SFDX Auto Deployer",
     "description": "Watches files to deploy",
-    "version": "0.0.2",
+    "version": "0.0.3",
     "publisher": "omniphx",
     "engines": {
         "vscode": "^1.28.0"
@@ -11,7 +11,7 @@
         "Other"
     ],
     "activationEvents": [
-        "workspaceContains:sfdx-project.json"
+        "workspaceContains:manifest/package.xml"
     ],
     "main": "./out/extension",
     "contributes": {

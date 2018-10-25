@@ -9,11 +9,14 @@ function watcher() {
     let config = workspace.getConfiguration('sfdx-auto-deployer');
     if(!config.enable) {return;}
 
-    let watcher = workspace.createFileSystemWatcher('**/*.{cls,js,trigger,page,component,cmp,auradoc,css,design,svg,*meta.xml}', true, false, true);
+    let watcher = workspace.createFileSystemWatcher('**/*.{cls,js,trigger,page,component,cmp,auradoc,css,design,svg,evt,*meta.xml}', true, false, true);
     watcher.onDidChange(deployer);
 }
 
 function deployer(event: Uri) {
+    let config = workspace.getConfiguration('sfdx-auto-deployer');
+    if(!config.enable) {return;}
+
     let outputChannel = window.createOutputChannel('SFDX Auto Deployer');
 
     outputChannel.show();
