@@ -1,43 +1,41 @@
-import {ExtensionContext, workspace, window, Uri} from 'vscode';
+import {ExtensionContext, workspace, window} from 'vscode';
 import {cd, exec} from 'shelljs';
 
 export function activate(context: ExtensionContext) {
-    watcher();
-}
-
-function watcher() {
     let config = workspace.getConfiguration('sfdx-auto-deployer');
     if(!config.enable) {return;}
+
+    let output = window.createOutputChannel('SFDX Auto Deployer');
 
     let watcher = workspace.createFileSystemWatcher('**/*.{cls,js,trigger,page,component,cmp,auradoc,css,design,svg,evt,*meta.xml}', true, false, true);
-    watcher.onDidChange(deployer);
-}
+    watcher.onDidChange((event) => {
+        let config = workspace.getConfiguration('sfdx-auto-deployer');
+        if(!config.enable) {
+            output.dispose();
+            watcher.dispose();
+            return;
+        }
 
-function deployer(event: Uri) {
-    let config = workspace.getConfiguration('sfdx-auto-deployer');
-    if(!config.enable) {return;}
+        output.show();
+        output.clear();
+        
+        if(!workspace.workspaceFolders) {
+            output.appendLine('Need a workspace directory to Autosave');
+            return;
+        }
 
-    let outputChannel = window.createOutputChannel('SFDX Auto Deployer');
+        output.appendLine('Deploying...');
 
-    outputChannel.show();
-    outputChannel.clear();
-    
-    if(!workspace.workspaceFolders) {
-        outputChannel.appendLine('Need a workspace directory to Autosave');
-        return;
-    }
+        let workspacePath = workspace.workspaceFolders[0].uri.path;
+        cd(workspacePath);
 
-    outputChannel.appendLine('Deploying...');
+        let path = event.path;
+        let command = `sfdx force:source:deploy --sourcepath ${path}`;
+        output.appendLine(command);
 
-    let workspacePath = workspace.workspaceFolders[0].uri.path;
-    cd(workspacePath);
-
-    let path = event.path;
-    let command = `sfdx force:source:deploy --sourcepath ${path}`;
-    outputChannel.appendLine(command);
-
-    exec(command, {}, (code, stdout, stderr) => {
-        outputChannel.appendLine(stdout);
-        outputChannel.appendLine(stderr);
+        exec(command, {}, (code, stdout, stderr) => {
+            output.appendLine(stdout);
+            output.appendLine(stderr);
+        });
     });
 }
