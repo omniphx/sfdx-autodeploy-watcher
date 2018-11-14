@@ -2,7 +2,7 @@
     "name": "sfdx-auto-deployer",
     "displayName": "SFDX Auto Deployer",
     "description": "Watches files to deploy",
-    "version": "0.0.4",
+    "version": "0.0.5",
     "publisher": "omniphx",
     "engines": {
         "vscode": "^1.28.0"
