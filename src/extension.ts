@@ -39,7 +39,7 @@ class Deployer {
             cd(workspacePath);
             
             this.output.appendLine('Deploying...');
-            let command = `sfdx force:source:deploy --sourcepath ${textDocument.fileName}`;
+            let command = `sfdx force:source:deploy --sourcepath '${textDocument.fileName}'`;
             this.output.appendLine(command);
     
             exec(command, {}, (code, stdout, stderr) => {
