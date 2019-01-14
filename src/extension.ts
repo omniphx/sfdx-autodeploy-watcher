@@ -36,6 +36,13 @@ class Deployer {
             this.output.clear();
 
             let workspacePath = workspace.workspaceFolders[0].uri.path;
+            
+            // repairing Windows path as it might contain a leading slash
+            let regex = new RegExp(`^/[a-z]:`, 'i'); 
+            if( workspacePath.match( regex ) ) {
+                workspacePath = workspacePath.substr( 1 );
+            }
+            
             cd(workspacePath);
             
             this.output.appendLine('Deploying...');
